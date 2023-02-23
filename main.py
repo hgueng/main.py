@@ -159,7 +159,7 @@ def plot_gyro_foreach(dataframes, satellite_names):
 
 def plot_wheel_foreach(dataframes, satellite_names):
     # Same procedure as above
-    # I divided all wanted telemtry channels into different functions to reduce compute time
+    # I divided all wanted telemetry channels into different functions to reduce compute time
     # Also you can just simply call the function for your wanted tel channel.
     fig, axs = plt.subplots(nrows=3, ncols=3, figsize=(16, 10))
     for i, df in enumerate(dataframes):
@@ -313,6 +313,8 @@ def detect_anomaly(subset_name = 'alpha', searchvalue = 'low_voltage' ):
         else:
             return False
     # Testing if wheel has failed or just standing still
+    # I tested out different threshholds and 10 is optimal in my opinion for this kind
+    # of anomaly detection
     elif searchvalue in ['wheel_s' ,'wheel_x','wheel_y','wheel_z']:
         df = df[[searchvalue]]
         df = df.dropna(subset=[searchvalue])
